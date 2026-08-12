@@ -28,9 +28,9 @@ export const Header: React.FC = () => {
   ];
 
   return (
-    <>
+    <div className="sticky top-0 z-50">
       {/* Top Banner with Quick Info */}
-      <div className="bg-[#2D2422] text-[#E8DCCF] text-xs py-2 px-4">
+      <div className="bg-[#2D2422] text-[#E8DCCF] text-xs py-1.5 px-4 shadow-xs">
         <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
           <div className="flex items-center gap-4 flex-wrap">
             <span className="flex items-center gap-1.5">
@@ -59,10 +59,10 @@ export const Header: React.FC = () => {
 
       {/* Main Header */}
       <header
-        className={`fixed top-8 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`transition-all duration-300 border-b border-[#E8E2D9]/60 ${
           isScrolled
-            ? 'bg-[#FAF7F2]/95 backdrop-blur-md shadow-md py-3'
-            : 'bg-[#FAF7F2]/80 backdrop-blur-sm py-4'
+            ? 'bg-[#FAF7F2]/95 backdrop-blur-md shadow-md py-2.5'
+            : 'bg-[#FAF7F2]/90 backdrop-blur-md shadow-xs py-3 sm:py-4'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -71,13 +71,13 @@ export const Header: React.FC = () => {
             <img
               src="/logo-tia-rita-pets.png"
               alt="Tia Rita Pets Logo"
-              className="h-12 w-auto object-contain transition-transform group-hover:scale-105"
+              className="h-10 sm:h-12 w-auto object-contain transition-transform group-hover:scale-105"
             />
             <div>
-              <span className="font-display font-bold text-xl sm:text-2xl text-[#2D2422] tracking-tight block leading-none">
+              <span className="font-display font-bold text-lg sm:text-2xl text-[#2D2422] tracking-tight block leading-none">
                 Tia Rita Pets
               </span>
-              <span className="text-[10px] sm:text-xs text-[#8B6B5D] uppercase tracking-wider font-semibold block mt-0.5">
+              <span className="text-[9px] sm:text-xs text-[#8B6B5D] uppercase tracking-wider font-semibold block mt-0.5">
                 Canil em Fortaleza/CE
               </span>
             </div>
@@ -121,7 +121,7 @@ export const Header: React.FC = () => {
 
         {/* Mobile Dropdown Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden bg-[#FAF7F2] border-b border-[#E8E2D9] px-4 pt-4 pb-6 mt-2 shadow-xl animate-in slide-in-from-top duration-200">
+          <div className="lg:hidden bg-[#FAF7F2] border-b border-[#E8E2D9] px-4 pt-3 pb-6 mt-2 shadow-xl animate-in slide-in-from-top duration-200">
             <nav className="flex flex-col gap-3">
               {navLinks.map((link) => (
                 <a
@@ -149,6 +149,7 @@ export const Header: React.FC = () => {
           </div>
         )}
       </header>
-    </>
+    </div>
+
   );
 };

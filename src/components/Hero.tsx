@@ -4,7 +4,7 @@ import { businessInfo, getWhatsAppLink } from '../data/content';
 
 export const Hero: React.FC = () => {
   return (
-    <section id="hero" className="relative pt-32 lg:pt-40 pb-20 md:pb-28 overflow-hidden bg-linear-to-b from-[#FFFDF9] via-[#FAF7F2] to-[#F5EFE6]">
+    <section id="hero" className="relative pt-8 sm:pt-12 lg:pt-16 pb-20 md:pb-28 overflow-hidden bg-linear-to-b from-[#FFFDF9] via-[#FAF7F2] to-[#F5EFE6]">
       {/* Background Subtle Decorative Elements */}
       <div className="absolute top-20 left-10 w-72 h-72 bg-[#C85A70]/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-[#D97757]/5 rounded-full blur-3xl pointer-events-none" />
