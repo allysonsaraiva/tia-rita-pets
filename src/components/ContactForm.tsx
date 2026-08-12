@@ -21,7 +21,7 @@ export const ContactForm: React.FC = () => {
     <section id="contato" className="py-20 bg-[#FFFDF9] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="bg-gradient-to-br from-[#2D2422] via-[#3A2F2D] to-[#2D2422] rounded-3xl p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden">
+        <div className="bg-linear-to-br from-[#2D2422] via-[#3A2F2D] to-[#2D2422] rounded-3xl p-8 sm:p-12 text-white shadow-2xl relative overflow-hidden">
           
           {/* Subtle Background Glow */}
           <div className="absolute top-0 right-0 w-80 h-80 bg-[#C85A70]/20 rounded-full blur-3xl pointer-events-none" />

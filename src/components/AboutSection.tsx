@@ -20,11 +20,11 @@ export const AboutSection: React.FC = () => {
                 <img
                   src="/images/about.png"
                   alt="Carinho e cuidado no Tia Rita Pets"
-                  className="w-full h-[420px] sm:h-[480px] object-cover rounded-2xl"
+                  className="w-full h-105 sm:h-120 object-cover rounded-2xl"
                 />
 
                 {/* Floating Stat Card 1 */}
-                <div className="absolute -bottom-6 -right-4 sm:right-4 bg-[#2D2422] text-white p-4 rounded-2xl shadow-xl max-w-[220px] border border-white/10">
+                <div className="absolute -bottom-6 -right-4 sm:right-4 bg-[#2D2422] text-white p-4 rounded-2xl shadow-xl max-w-55 border border-white/10">
                   <div className="flex items-center gap-2 text-rose-300 font-bold text-sm mb-1">
                     <Heart className="w-4 h-4 fill-rose-300" />
                     <span>Amor incondicional</span>

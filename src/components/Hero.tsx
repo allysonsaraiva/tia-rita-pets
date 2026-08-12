@@ -4,7 +4,7 @@ import { businessInfo, getWhatsAppLink } from '../data/content';
 
 export const Hero: React.FC = () => {
   return (
-    <section id="hero" className="relative pt-32 lg:pt-40 pb-20 md:pb-28 overflow-hidden bg-gradient-to-b from-[#FFFDF9] via-[#FAF7F2] to-[#F5EFE6]">
+    <section id="hero" className="relative pt-32 lg:pt-40 pb-20 md:pb-28 overflow-hidden bg-linear-to-b from-[#FFFDF9] via-[#FAF7F2] to-[#F5EFE6]">
       {/* Background Subtle Decorative Elements */}
       <div className="absolute top-20 left-10 w-72 h-72 bg-[#C85A70]/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-96 h-96 bg-[#D97757]/5 rounded-full blur-3xl pointer-events-none" />
@@ -103,13 +103,13 @@ export const Hero: React.FC = () => {
             <div className="relative mx-auto max-w-md lg:max-w-none">
               
               {/* Decorative Card Framing */}
-              <div className="absolute -inset-4 bg-gradient-to-tr from-[#C85A70]/20 to-[#D97757]/20 rounded-3xl blur-lg opacity-70 transform -rotate-1" />
+              <div className="absolute -inset-4 bg-linear-to-tr from-[#C85A70]/20 to-[#D97757]/20 rounded-3xl blur-lg opacity-70 transform -rotate-1" />
               
               <div className="relative bg-white p-3 sm:p-4 rounded-3xl shadow-2xl border border-[#E8E2D9]/80 overflow-hidden">
                 <img
                   src="/images/hero.png"
                   alt="Filhote de pequeno porte amado no Tia Rita Pets"
-                  className="w-full h-[380px] sm:h-[460px] object-cover rounded-2xl shadow-inner transform transition-transform duration-700 hover:scale-105"
+                  className="w-full h-95 sm:h-115 object-cover rounded-2xl shadow-inner transform transition-transform duration-700 hover:scale-105"
                 />
 
                 {/* Floating Overlay Badge 1: Location */}
@@ -119,7 +119,7 @@ export const Hero: React.FC = () => {
                 </div>
 
                 {/* Floating Overlay Badge 2: Loving Guarantee */}
-                <div className="absolute bottom-8 left-8 bg-[#2D2422]/90 backdrop-blur-md text-white p-3.5 rounded-2xl shadow-2xl max-w-[240px] border border-white/10">
+                <div className="absolute bottom-8 left-8 bg-[#2D2422]/90 backdrop-blur-md text-white p-3.5 rounded-2xl shadow-2xl max-w-60 border border-white/10">
                   <div className="flex items-center gap-2 text-xs font-bold text-amber-300 mb-1">
                     <Heart className="w-4 h-4 fill-amber-300" />
                     <span>Cuidado & Carinho</span>

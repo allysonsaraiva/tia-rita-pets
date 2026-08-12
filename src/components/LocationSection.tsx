@@ -104,11 +104,11 @@ export const LocationSection: React.FC = () => {
           </div>
 
           {/* Right Column: Google Maps Embed Frame */}
-          <div className="lg:col-span-7 bg-white p-3 rounded-3xl border border-[#E8E2D9] shadow-md min-h-[380px] lg:min-h-[460px] flex">
+          <div className="lg:col-span-7 bg-white p-3 rounded-3xl border border-[#E8E2D9] shadow-md min-h-95 lg:min-h-115 flex">
             <iframe
               title="Mapa de localização do Tia Rita Pets no Meireles, Fortaleza/CE"
               src={businessInfo.googleMapsEmbedUrl}
-              className="w-full h-full min-h-[360px] rounded-2xl border-0"
+              className="w-full h-full min-h-90 rounded-2xl border-0"
               loading="lazy"
               allowFullScreen
               referrerPolicy="no-referrer-when-downgrade"

@@ -23,7 +23,7 @@ export const BreedsSection: React.FC = () => {
         </div>
 
         {/* Availability Dynamic Banner */}
-        <div className="bg-gradient-to-r from-[#FFF8F0] via-[#FFF3EB] to-[#FFF8F0] border border-[#E8D6C9] rounded-2xl p-4 sm:p-6 mb-12 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
+        <div className="bg-linear-to-r from-[#FFF8F0] via-[#FFF3EB] to-[#FFF8F0] border border-[#E8D6C9] rounded-2xl p-4 sm:p-6 mb-12 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
           <div className="flex items-center gap-3 text-center sm:text-left">
             <div className="bg-[#C85A70]/10 p-3 rounded-full text-[#C85A70] shrink-0 hidden sm:block">
               <Info className="w-6 h-6" />
