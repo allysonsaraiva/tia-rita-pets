@@ -8,7 +8,11 @@ const FRAME_PATHS = Array.from({ length: TOTAL_FRAMES }, (_, i) => {
   return `/content-hero/Dog_running_to_man_embracing_202608131159_${paddedIndex}.jpg`;
 });
 
-export const Hero: React.FC = () => {
+interface HeroProps {
+  onLoadingStatusChange?: (ratio: number, fullyLoaded: boolean) => void;
+}
+
+export const Hero: React.FC<HeroProps> = ({ onLoadingStatusChange }) => {
   const heroRef = useRef<HTMLElement | null>(null);
   const scrollProgressRef = useRef<number>(0);
   const [scrollProgressState, setScrollProgressState] = useState<number>(0);
@@ -66,10 +70,14 @@ export const Hero: React.FC = () => {
     };
   }, [handleScroll]);
 
-  const handleLoadingStatusChange = useCallback((ratio: number, fullyLoaded: boolean) => {
-    setLoadingRatio(ratio);
-    setIsFullyLoaded(fullyLoaded);
-  }, []);
+  const handleCanvasLoadingStatusChange = useCallback(
+    (ratio: number, fullyLoaded: boolean) => {
+      setLoadingRatio(ratio);
+      setIsFullyLoaded(fullyLoaded);
+      onLoadingStatusChange?.(ratio, fullyLoaded);
+    },
+    [onLoadingStatusChange]
+  );
 
   return (
     <section
@@ -85,7 +93,7 @@ export const Hero: React.FC = () => {
           totalFrames={TOTAL_FRAMES}
           framePaths={FRAME_PATHS}
           reducedMotion={reducedMotion}
-          onLoadingStatusChange={handleLoadingStatusChange}
+          onLoadingStatusChange={handleCanvasLoadingStatusChange}
         />
 
         {/* Minimalist Editorial Story Content */}
