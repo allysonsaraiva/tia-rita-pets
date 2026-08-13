@@ -51,13 +51,8 @@ export const AboutSection: React.FC = () => {
 
           {/* Right Column: Institutional Text */}
           <div className="lg:col-span-7 space-y-6 order-1 lg:order-2">
-            
-            <div className="inline-flex items-center gap-1.5 bg-[#F3E8E0] text-[#C85A70] px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase">
-              ❤️ {aboutStory.title}
-            </div>
-
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-[#2D2422] leading-tight">
-              Uma história que nasceu da paixão e do carinho verdadeiro.
+              Uma história que nasceu da  <span className="text-[#C85A70]">paixão e do carinho</span> verdadeiro.
             </h2>
 
             <div className="space-y-4 text-base text-[#5A4D4A] leading-relaxed">

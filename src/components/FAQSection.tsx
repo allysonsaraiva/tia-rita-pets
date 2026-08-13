@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { faqData } from '../data/content';
-import { ChevronDown, HelpCircle, MessageCircle } from 'lucide-react';
+import { ChevronDown, HelpCircle } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 import { getWhatsAppLink } from '../data/content';
 
 export const FAQSection: React.FC = () => {
@@ -16,11 +17,8 @@ export const FAQSection: React.FC = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
-          <div className="inline-flex items-center gap-1.5 bg-[#F3E8E0] text-[#C85A70] px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase">
-            ❓ Dúvidas Frequentes
-          </div>
           <h2 className="text-3xl sm:text-4xl font-display font-bold text-[#2D2422]">
-            Tudo o que você precisa saber antes de buscar seu filhote
+            Tudo o que você precisa saber antes de <p className="text-[#C85A70]">buscar seu filhote</p>
           </h2>
           <p className="text-sm sm:text-base text-[#5A4D4A]">
             Esclarecemos as dúvidas mais comuns sobre visita, vacinas, suporte e entrega dos nossos cães de pequeno porte.
@@ -39,7 +37,7 @@ export const FAQSection: React.FC = () => {
               >
                 <button
                   onClick={() => toggleAccordion(item.id)}
-                  className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 font-bold text-base sm:text-lg text-[#2D2422] hover:text-[#C85A70] transition-colors"
+                  className="w-full cursor-pointer p-5 sm:p-6 text-left flex items-center justify-between gap-4 font-bold text-base sm:text-lg text-[#2D2422] hover:text-[#C85A70] transition-colors"
                   aria-expanded={isOpen}
                 >
                   <span className="flex items-center gap-3">
@@ -76,7 +74,7 @@ export const FAQSection: React.FC = () => {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold px-6 py-3 rounded-full text-sm shadow-md transition-all"
           >
-            <MessageCircle className="w-4 h-4 fill-current" />
+            <WhatsAppIcon className="w-4 h-4" />
             <span>Tirar dúvidas pelo WhatsApp</span>
           </a>
         </div>

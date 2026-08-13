@@ -1,7 +1,8 @@
 import React from 'react';
 import { breedsData } from '../data/content';
 import { BreedCard } from './BreedCard';
-import { Info, MessageCircle } from 'lucide-react';
+import { Info } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 import { getWhatsAppLink } from '../data/content';
 
 export const BreedsSection: React.FC = () => {
@@ -11,11 +12,8 @@ export const BreedsSection: React.FC = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <div className="inline-flex items-center gap-1.5 bg-[#F3E8E0] text-[#C85A70] px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase">
-            🐾 Nossos Amiguinhos
-          </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-[#2D2422]">
-            Raças Especializadas de Pequeno Porte
+            Raças Especializadas de <p className="text-[#C85A70]">Pequeno Porte</p>
           </h2>
           <p className="text-base sm:text-lg text-[#5A4D4A] leading-relaxed">
             Criamos com amor e dedicação cães saudáveis, sociais e com temperamento equilibrado para alegrar a sua casa.
@@ -44,7 +42,7 @@ export const BreedsSection: React.FC = () => {
             rel="noopener noreferrer"
             className="shrink-0 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold px-5 py-2.5 rounded-full text-xs sm:text-sm flex items-center gap-2 shadow-sm transition-all"
           >
-            <MessageCircle className="w-4 h-4 fill-current" />
+            <WhatsAppIcon className="w-4 h-4" />
             <span>Consultar Ninhada Atual</span>
           </a>
         </div>

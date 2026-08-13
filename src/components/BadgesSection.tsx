@@ -11,9 +11,6 @@ export const BadgesSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         
         <div className="text-center max-w-2xl mx-auto mb-12 space-y-3">
-          <div className="inline-flex items-center gap-1.5 bg-[#C85A70]/20 text-rose-300 px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase border border-[#C85A70]/30">
-            ★ Diferenciais & Compromisso
-          </div>
           <h2 className="text-3xl sm:text-4xl font-display font-bold text-[#FFFDF9]">
             Por que tutores de todo o Ceará confiam no Tia Rita Pets?
           </h2>

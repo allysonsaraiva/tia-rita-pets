@@ -1,5 +1,6 @@
 import React from 'react';
-import { MessageCircle, Heart, CheckCircle2 } from 'lucide-react';
+import { Heart, CheckCircle2 } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 import { Breed } from '../types';
 import { getWhatsAppLink } from '../data/content';
 
@@ -82,8 +83,8 @@ export const BreedCard: React.FC<BreedCardProps> = ({ breed }) => {
             rel="noopener noreferrer"
             className="w-full inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold py-3 px-4 rounded-2xl shadow-sm hover:shadow-md transition-all duration-200 text-sm"
           >
-            <MessageCircle className="w-4 h-4 fill-current" />
-            <span>Consultar Filhotes no WhatsApp</span>
+            <WhatsAppIcon className="w-4 h-4" />
+            <span>Consultar Disponibilidade</span>
           </a>
         </div>
       </div>
