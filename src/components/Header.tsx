@@ -8,13 +8,13 @@ export const Header: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
+      if (window.scrollY > 50) {
         setIsScrolled(true);
       } else {
         setIsScrolled(false);
       }
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -30,7 +30,7 @@ export const Header: React.FC = () => {
   return (
     <div className="sticky top-0 z-50">
       {/* Top Banner with Quick Info */}
-      <div className="bg-[#2D2422] text-[#E8DCCF] text-xs py-1.5 px-4 shadow-xs">
+      <div className="bg-[#140F0E] text-[#E8DCCF] text-xs py-1.5 px-4 shadow-xs">
         <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
           <div className="flex items-center gap-4 flex-wrap">
             <span className="flex items-center gap-1.5">
@@ -59,10 +59,10 @@ export const Header: React.FC = () => {
 
       {/* Main Header */}
       <header
-        className={`transition-all duration-300 border-b border-[#E8E2D9]/60 ${
+        className={`transition-all duration-300 ${
           isScrolled
-            ? 'bg-[#FAF7F2]/95 backdrop-blur-md shadow-md py-2.5'
-            : 'bg-[#FAF7F2]/90 backdrop-blur-md shadow-xs py-3 sm:py-4'
+            ? 'bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#E8E2D9]/80 shadow-md py-2.5'
+            : 'bg-[#1E1715]/75 backdrop-blur-md border-b border-white/10 py-3 sm:py-4'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -74,10 +74,18 @@ export const Header: React.FC = () => {
               className="h-10 sm:h-12 w-auto object-contain transition-transform group-hover:scale-105"
             />
             <div>
-              <span className="font-display font-bold text-lg sm:text-2xl text-[#2D2422] tracking-tight block leading-none">
+              <span
+                className={`font-display font-bold text-lg sm:text-2xl tracking-tight block leading-none transition-colors ${
+                  isScrolled ? 'text-[#2D2422]' : 'text-white'
+                }`}
+              >
                 Tia Rita Pets
               </span>
-              <span className="text-[9px] sm:text-xs text-[#8B6B5D] uppercase tracking-wider font-semibold block mt-0.5">
+              <span
+                className={`text-[9px] sm:text-xs uppercase tracking-wider font-semibold block mt-0.5 transition-colors ${
+                  isScrolled ? 'text-[#8B6B5D]' : 'text-amber-200/80'
+                }`}
+              >
                 Canil em Fortaleza/CE
               </span>
             </div>
@@ -89,7 +97,11 @@ export const Header: React.FC = () => {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-[#2D2422] hover:text-[#C85A70] font-medium text-sm transition-colors duration-200"
+                className={`font-medium text-sm transition-colors duration-200 ${
+                  isScrolled
+                    ? 'text-[#2D2422] hover:text-[#C85A70]'
+                    : 'text-amber-50/90 hover:text-amber-300'
+                }`}
               >
                 {link.name}
               </a>
@@ -112,7 +124,11 @@ export const Header: React.FC = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-lg text-[#2D2422] hover:bg-[#E8E2D9] transition-colors"
+            className={`lg:hidden p-2 rounded-lg transition-colors ${
+              isScrolled
+                ? 'text-[#2D2422] hover:bg-[#E8E2D9]'
+                : 'text-white hover:bg-white/10'
+            }`}
             aria-label="Abrir menu"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -121,14 +137,24 @@ export const Header: React.FC = () => {
 
         {/* Mobile Dropdown Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden bg-[#FAF7F2] border-b border-[#E8E2D9] px-4 pt-3 pb-6 mt-2 shadow-xl animate-in slide-in-from-top duration-200">
+          <div
+            className={`lg:hidden border-b px-4 pt-3 pb-6 mt-2 shadow-xl animate-in slide-in-from-top duration-200 ${
+              isScrolled
+                ? 'bg-[#FAF7F2] border-[#E8E2D9]'
+                : 'bg-[#1E1715] border-white/10'
+            }`}
+          >
             <nav className="flex flex-col gap-3">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-[#2D2422] hover:text-[#C85A70] font-medium py-2 text-base border-b border-[#E8E2D9]/50"
+                  className={`font-medium py-2 text-base border-b ${
+                    isScrolled
+                      ? 'text-[#2D2422] hover:text-[#C85A70] border-[#E8E2D9]/50'
+                      : 'text-white hover:text-amber-300 border-white/10'
+                  }`}
                 >
                   {link.name}
                 </a>
@@ -150,6 +176,5 @@ export const Header: React.FC = () => {
         )}
       </header>
     </div>
-
   );
 };

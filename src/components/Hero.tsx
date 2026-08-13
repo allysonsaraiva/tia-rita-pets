@@ -1,140 +1,101 @@
-import React from 'react';
-import { MessageCircle, Heart, Star, ShieldCheck, Sparkles, ChevronDown } from 'lucide-react';
-import { businessInfo, getWhatsAppLink } from '../data/content';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
+import { HeroScrollCanvas } from './HeroScrollCanvas';
+import { HeroStoryContent } from './HeroStoryContent';
+
+const TOTAL_FRAMES = 80;
+const FRAME_PATHS = Array.from({ length: TOTAL_FRAMES }, (_, i) => {
+  const paddedIndex = String(i).padStart(3, '0');
+  return `/content-hero/Dog_running_to_man_embracing_202608131159_${paddedIndex}.jpg`;
+});
 
 export const Hero: React.FC = () => {
+  const heroRef = useRef<HTMLElement | null>(null);
+  const [scrollProgress, setScrollProgress] = useState<number>(0);
+  const [loadingRatio, setLoadingRatio] = useState<number>(0);
+  const [isFullyLoaded, setIsFullyLoaded] = useState<boolean>(false);
+  const [reducedMotion, setReducedMotion] = useState<boolean>(false);
+
+  // Check prefers-reduced-motion accessibility preference
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setReducedMotion(mediaQuery.matches);
+
+    const handleChange = (e: MediaQueryListEvent) => {
+      setReducedMotion(e.matches);
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
+
+  // Calculate scroll progress relative to hero container
+  const handleScroll = useCallback(() => {
+    if (!heroRef.current || reducedMotion) return;
+
+    const rect = heroRef.current.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+    const totalScrollableDistance = rect.height - windowHeight;
+
+    if (totalScrollableDistance <= 0) {
+      setScrollProgress(0);
+      return;
+    }
+
+    const currentScroll = -rect.top;
+    const rawProgress = currentScroll / totalScrollableDistance;
+    const clampedProgress = Math.min(1, Math.max(0, rawProgress));
+    setScrollProgress(clampedProgress);
+  }, [reducedMotion]);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', handleScroll);
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, [handleScroll]);
+
+  const handleLoadingStatusChange = useCallback((ratio: number, fullyLoaded: boolean) => {
+    setLoadingRatio(ratio);
+    setIsFullyLoaded(fullyLoaded);
+  }, []);
+
   return (
-    <section id="hero" className="relative pt-8 sm:pt-12 lg:pt-16 pb-20 md:pb-28 overflow-hidden bg-linear-to-b from-[#FFFDF9] via-[#FAF7F2] to-[#F5EFE6]">
-      {/* Background Subtle Decorative Elements */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-[#C85A70]/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-96 h-96 bg-[#D97757]/5 rounded-full blur-3xl pointer-events-none" />
+    <section
+      id="hero"
+      ref={heroRef}
+      className={`relative w-full bg-[#1E1715] ${reducedMotion ? 'h-screen' : 'h-[350vh]'}`}
+    >
+      {/* Sticky Canvas & Overlay Container */}
+      <div className="sticky top-0 h-screen w-full overflow-hidden">
+        {/* Canvas Render Component */}
+        <HeroScrollCanvas
+          scrollProgress={scrollProgress}
+          totalFrames={TOTAL_FRAMES}
+          framePaths={FRAME_PATHS}
+          reducedMotion={reducedMotion}
+          onLoadingStatusChange={handleLoadingStatusChange}
+        />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          
-          {/* Left Column: Text & CTAs */}
-          <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-            
-            {/* Top Tagline Badge */}
-            <div className="inline-flex items-center gap-2 bg-[#F3E8E0] text-[#C85A70] px-4 py-2 rounded-full text-xs sm:text-sm font-semibold tracking-wide border border-[#E5D2C5]">
-              <Heart className="w-4 h-4 fill-[#C85A70]" />
-              <span>Canil Especializado em Raças de Pequeno Porte</span>
-            </div>
+        {/* Text Storytelling & Motion Overlay */}
+        <HeroStoryContent scrollProgress={scrollProgress} reducedMotion={reducedMotion} />
 
-            {/* Main Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-[#2D2422] leading-[1.15] tracking-tight">
-              <span className="text-[#C85A70] block italic font-normal">Puro amor...</span>
-              Encontre o novo integrante da sua família em Fortaleza.
-            </h1>
-
-            {/* Subtitle / Mission */}
-            <p className="text-base sm:text-lg text-[#5A4D4A] max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              {businessInfo.subTagline}
-            </p>
-
-            {/* Raças em destaque pills */}
-            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 pt-1">
-              <span className="text-xs font-semibold text-[#8B6B5D] uppercase tracking-wider">Raças:</span>
-              {['Spitz Alemão', 'Chihuahua', 'Maltês', 'Yorkshire'].map((raca) => (
-                <span key={raca} className="bg-white/80 border border-[#E8E2D9] px-3 py-1 rounded-full text-xs font-medium text-[#2D2422] shadow-xs">
-                  🐾 {raca}
-                </span>
-              ))}
-            </div>
-
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
-              <a
-                href="#racas"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#C85A70] hover:bg-[#b04a5f] text-white font-bold px-8 py-4 rounded-full text-base shadow-lg shadow-[#C85A70]/25 hover:shadow-xl hover:shadow-[#C85A70]/30 transition-all duration-200 hover:-translate-y-0.5"
-              >
-                <span>Ver Filhotes Disponíveis</span>
-                <ChevronDown className="w-5 h-5" />
-              </a>
-
-              <a
-                href={getWhatsAppLink()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold px-7 py-4 rounded-full text-base shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5"
-              >
-                <MessageCircle className="w-5 h-5 fill-current" />
-                <span>Falar no WhatsApp</span>
-              </a>
-            </div>
-
-            {/* Trust Markers Bar */}
-            <div className="pt-6 border-t border-[#E8E2D9] grid grid-cols-2 sm:grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0 text-left">
-              <div className="flex items-center gap-2.5">
-                <div className="bg-amber-100 p-2 rounded-full text-amber-600">
-                  <Star className="w-5 h-5 fill-amber-400" />
-                </div>
-                <div>
-                  <div className="font-bold text-sm text-[#2D2422]">4.9 de 5 ★</div>
-                  <div className="text-xs text-[#8B6B5D]">115+ avaliações Google</div>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2.5">
-                <div className="bg-emerald-100 p-2 rounded-full text-emerald-600">
-                  <ShieldCheck className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="font-bold text-sm text-[#2D2422]">Criação Ética</div>
-                  <div className="text-xs text-[#8B6B5D]">Ambiente Residencial</div>
-                </div>
-              </div>
-
-              <div className="col-span-2 sm:col-span-1 flex items-center gap-2.5">
-                <div className="bg-rose-100 p-2 rounded-full text-[#C85A70]">
-                  <Sparkles className="w-5 h-5" />
-                </div>
-                <div>
-                  <div className="font-bold text-sm text-[#2D2422]">Suporte Total</div>
-                  <div className="text-xs text-[#8B6B5D]">Pré e Pós-Venda</div>
-                </div>
-              </div>
-            </div>
-
+        {/* Subtle Discrete Loading Indicator */}
+        {!isFullyLoaded && (
+          <div className="absolute bottom-6 right-6 z-30 bg-black/60 backdrop-blur-md border border-white/10 px-3.5 py-1.5 rounded-full flex items-center gap-2.5 text-[11px] font-medium text-amber-200 shadow-xl transition-opacity duration-300">
+            <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
+            <span>Carregando experiência ({Math.round(loadingRatio * 100)}%)</span>
           </div>
+        )}
 
-          {/* Right Column: Hero Image Showcase */}
-          <div className="lg:col-span-5 relative">
-            <div className="relative mx-auto max-w-md lg:max-w-none">
-              
-              {/* Decorative Card Framing */}
-              <div className="absolute -inset-4 bg-linear-to-tr from-[#C85A70]/20 to-[#D97757]/20 rounded-3xl blur-lg opacity-70 transform -rotate-1" />
-              
-              <div className="relative bg-white p-3 sm:p-4 rounded-3xl shadow-2xl border border-[#E8E2D9]/80 overflow-hidden">
-                <img
-                  src="/images/hero.png"
-                  alt="Filhote de pequeno porte amado no Tia Rita Pets"
-                  className="w-full h-95 sm:h-115 object-cover rounded-2xl shadow-inner transform transition-transform duration-700 hover:scale-105"
-                />
-
-                {/* Floating Overlay Badge 1: Location */}
-                <div className="absolute top-8 right-8 bg-white/95 backdrop-blur-md px-4 py-2.5 rounded-2xl shadow-xl border border-[#E8E2D9] flex items-center gap-2 text-xs font-bold text-[#2D2422]">
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
-                  <span>Fortaleza, Meireles</span>
-                </div>
-
-                {/* Floating Overlay Badge 2: Loving Guarantee */}
-                <div className="absolute bottom-8 left-8 bg-[#2D2422]/90 backdrop-blur-md text-white p-3.5 rounded-2xl shadow-2xl max-w-60 border border-white/10">
-                  <div className="flex items-center gap-2 text-xs font-bold text-amber-300 mb-1">
-                    <Heart className="w-4 h-4 fill-amber-300" />
-                    <span>Cuidado & Carinho</span>
-                  </div>
-                  <p className="text-[11px] text-[#E8DCCF] leading-tight">
-                    Transição simples e tranquila do nosso lar para a sua família.
-                  </p>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
+        {/* Smooth Bottom Mask Gradient Transition into #racas */}
+        <div className="absolute bottom-0 left-0 right-0 h-28 sm:h-36 bg-linear-to-t from-[#FAF7F2] via-[#FAF7F2]/60 to-transparent pointer-events-none z-20" />
       </div>
     </section>
   );
 };
+
+export default Hero;
