@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { MessageCircle, Send, Sparkles, Heart } from 'lucide-react';
+import { Send, Heart } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 import { breedsData, businessInfo, getWhatsAppLink } from '../data/content';
 
 export const ContactForm: React.FC = () => {
@@ -52,7 +53,7 @@ export const ContactForm: React.FC = () => {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold px-6 py-3.5 rounded-2xl shadow-lg transition-all text-sm"
                 >
-                  <MessageCircle className="w-5 h-5 fill-current" />
+                  <WhatsAppIcon className="w-5 h-5" />
                   <span>Conversar no WhatsApp Agora</span>
                 </a>
               </div>

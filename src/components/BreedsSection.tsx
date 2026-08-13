@@ -1,7 +1,8 @@
 import React from 'react';
 import { breedsData } from '../data/content';
 import { BreedCard } from './BreedCard';
-import { Info, MessageCircle } from 'lucide-react';
+import { Info } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 import { getWhatsAppLink } from '../data/content';
 
 export const BreedsSection: React.FC = () => {
@@ -41,7 +42,7 @@ export const BreedsSection: React.FC = () => {
             rel="noopener noreferrer"
             className="shrink-0 bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold px-5 py-2.5 rounded-full text-xs sm:text-sm flex items-center gap-2 shadow-sm transition-all"
           >
-            <MessageCircle className="w-4 h-4 fill-current" />
+            <WhatsAppIcon className="w-4 h-4" />
             <span>Consultar Ninhada Atual</span>
           </a>
         </div>

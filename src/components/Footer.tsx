@@ -1,6 +1,7 @@
 import React from 'react';
 import { businessInfo, getWhatsAppLink } from '../data/content';
-import { Heart, Instagram, Facebook, MessageCircle, MapPin, Phone, Mail } from 'lucide-react';
+import { Heart, Instagram, Facebook, MapPin, Phone, Mail } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -60,7 +61,7 @@ export const Footer: React.FC = () => {
                 className="w-9 h-9 rounded-full bg-white/10 hover:bg-[#25D366] text-white flex items-center justify-center transition-colors"
                 aria-label="WhatsApp Tia Rita Pets"
               >
-                <MessageCircle className="w-4 h-4" />
+                <WhatsAppIcon className="w-4 h-4" />
               </a>
             </div>
           </div>

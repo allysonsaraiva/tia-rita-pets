@@ -1,5 +1,6 @@
 import React from 'react';
-import { MessageCircle, ChevronDown } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 import { getWhatsAppLink } from '../data/content';
 
 interface HeroStoryContentProps {
@@ -98,7 +99,7 @@ export const HeroStoryContent: React.FC<HeroStoryContentProps> = ({
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 bg-white/15 hover:bg-white/25 text-white backdrop-blur-md border border-white/20 font-semibold px-6 py-3.5 rounded-full text-base transition-all duration-200"
             >
-              <MessageCircle className="w-4 h-4" />
+              <WhatsAppIcon className="w-4 h-4" />
               <span>WhatsApp</span>
             </a>
           </div>
