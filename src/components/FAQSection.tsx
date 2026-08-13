@@ -16,9 +16,6 @@ export const FAQSection: React.FC = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
-          <div className="inline-flex items-center gap-1.5 bg-[#F3E8E0] text-[#C85A70] px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase">
-            ❓ Dúvidas Frequentes
-          </div>
           <h2 className="text-3xl sm:text-4xl font-display font-bold text-[#2D2422]">
             Tudo o que você precisa saber antes de buscar seu filhote
           </h2>

@@ -10,25 +10,23 @@ const FRAME_PATHS = Array.from({ length: TOTAL_FRAMES }, (_, i) => {
 
 export const Hero: React.FC = () => {
   const heroRef = useRef<HTMLElement | null>(null);
-  const [scrollProgress, setScrollProgress] = useState<number>(0);
+  const scrollProgressRef = useRef<number>(0);
+  const [scrollProgressState, setScrollProgressState] = useState<number>(0);
   const [loadingRatio, setLoadingRatio] = useState<number>(0);
   const [isFullyLoaded, setIsFullyLoaded] = useState<boolean>(false);
   const [reducedMotion, setReducedMotion] = useState<boolean>(false);
 
-  // Check prefers-reduced-motion accessibility preference
+  // Accessibility reduced motion
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     setReducedMotion(mediaQuery.matches);
 
-    const handleChange = (e: MediaQueryListEvent) => {
-      setReducedMotion(e.matches);
-    };
-
+    const handleChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
     mediaQuery.addEventListener('change', handleChange);
     return () => mediaQuery.removeEventListener('change', handleChange);
   }, []);
 
-  // Calculate scroll progress relative to hero container
+  // Calculate scroll progress with fast throttle for UI text and ref for Canvas
   const handleScroll = useCallback(() => {
     if (!heroRef.current || reducedMotion) return;
 
@@ -37,14 +35,24 @@ export const Hero: React.FC = () => {
     const totalScrollableDistance = rect.height - windowHeight;
 
     if (totalScrollableDistance <= 0) {
-      setScrollProgress(0);
+      scrollProgressRef.current = 0;
+      setScrollProgressState(0);
       return;
     }
 
     const currentScroll = -rect.top;
     const rawProgress = currentScroll / totalScrollableDistance;
     const clampedProgress = Math.min(1, Math.max(0, rawProgress));
-    setScrollProgress(clampedProgress);
+
+    scrollProgressRef.current = clampedProgress;
+
+    // Throttle React state updates so we don't trigger React renders on every pixel
+    setScrollProgressState((prev) => {
+      if (Math.abs(prev - clampedProgress) > 0.015) {
+        return clampedProgress;
+      }
+      return prev;
+    });
   }, [reducedMotion]);
 
   useEffect(() => {
@@ -67,32 +75,32 @@ export const Hero: React.FC = () => {
     <section
       id="hero"
       ref={heroRef}
-      className={`relative w-full bg-[#1E1715] ${reducedMotion ? 'h-screen' : 'h-[350vh]'}`}
+      className={`relative w-full bg-[#1A1412] ${reducedMotion ? 'h-screen' : 'h-[200vh]'}`}
     >
-      {/* Sticky Canvas & Overlay Container */}
+      {/* Sticky Canvas & Story Container */}
       <div className="sticky top-0 h-screen w-full overflow-hidden">
-        {/* Canvas Render Component */}
+        {/* Optimized Canvas Engine */}
         <HeroScrollCanvas
-          scrollProgress={scrollProgress}
+          scrollProgressRef={scrollProgressRef}
           totalFrames={TOTAL_FRAMES}
           framePaths={FRAME_PATHS}
           reducedMotion={reducedMotion}
           onLoadingStatusChange={handleLoadingStatusChange}
         />
 
-        {/* Text Storytelling & Motion Overlay */}
-        <HeroStoryContent scrollProgress={scrollProgress} reducedMotion={reducedMotion} />
+        {/* Minimalist Editorial Story Content */}
+        <HeroStoryContent scrollProgress={scrollProgressState} reducedMotion={reducedMotion} />
 
-        {/* Subtle Discrete Loading Indicator */}
+        {/* Preload Status Indicator */}
         {!isFullyLoaded && (
-          <div className="absolute bottom-6 right-6 z-30 bg-black/60 backdrop-blur-md border border-white/10 px-3.5 py-1.5 rounded-full flex items-center gap-2.5 text-[11px] font-medium text-amber-200 shadow-xl transition-opacity duration-300">
-            <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
-            <span>Carregando experiência ({Math.round(loadingRatio * 100)}%)</span>
+          <div className="absolute bottom-6 right-6 z-30 bg-black/50 backdrop-blur-md border border-white/10 px-3 py-1 rounded-full flex items-center gap-2 text-[10px] text-amber-200">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping" />
+            <span>Carregando ({Math.round(loadingRatio * 100)}%)</span>
           </div>
         )}
 
-        {/* Smooth Bottom Mask Gradient Transition into #racas */}
-        <div className="absolute bottom-0 left-0 right-0 h-28 sm:h-36 bg-linear-to-t from-[#FAF7F2] via-[#FAF7F2]/60 to-transparent pointer-events-none z-20" />
+        {/* Soft Bottom Transition Gradient */}
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-linear-to-t from-[#FAF7F2] to-transparent pointer-events-none z-20" />
       </div>
     </section>
   );

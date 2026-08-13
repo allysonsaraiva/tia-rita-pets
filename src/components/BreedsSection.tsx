@@ -11,11 +11,8 @@ export const BreedsSection: React.FC = () => {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <div className="inline-flex items-center gap-1.5 bg-[#F3E8E0] text-[#C85A70] px-4 py-1.5 rounded-full text-xs font-semibold tracking-wide uppercase">
-            🐾 Nossos Amiguinhos
-          </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-[#2D2422]">
-            Raças Especializadas de Pequeno Porte
+            Raças Especializadas de <p className="text-[#C85A70]">Pequeno Porte</p>
           </h2>
           <p className="text-base sm:text-lg text-[#5A4D4A] leading-relaxed">
             Criamos com amor e dedicação cães saudáveis, sociais e com temperamento equilibrado para alegrar a sua casa.

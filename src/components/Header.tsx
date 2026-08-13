@@ -8,13 +8,29 @@ export const Header: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
+      const racasElement = document.getElementById('racas');
+      if (racasElement) {
+        const rect = racasElement.getBoundingClientRect();
+        // Set solid background when entering BreedsSection (#racas)
+        if (rect.top <= 100) {
+          setIsScrolled(true);
+          return;
+        }
       } else {
-        setIsScrolled(false);
+        const heroElement = document.getElementById('hero');
+        if (heroElement) {
+          const rect = heroElement.getBoundingClientRect();
+          if (rect.bottom <= 100) {
+            setIsScrolled(true);
+            return;
+          }
+        }
       }
+      setIsScrolled(false);
     };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -30,7 +46,13 @@ export const Header: React.FC = () => {
   return (
     <div className="sticky top-0 z-50">
       {/* Top Banner with Quick Info */}
-      <div className="bg-[#140F0E] text-[#E8DCCF] text-xs py-1.5 px-4 shadow-xs">
+      <div
+        className={`text-xs py-1.5 px-4 transition-colors duration-300 ${
+          isScrolled
+            ? 'bg-[#140F0E] text-[#E8DCCF] shadow-xs'
+            : 'bg-black/30 backdrop-blur-xs text-amber-50/90 border-b border-white/10'
+        }`}
+      >
         <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
           <div className="flex items-center gap-4 flex-wrap">
             <span className="flex items-center gap-1.5">
@@ -62,7 +84,7 @@ export const Header: React.FC = () => {
         className={`transition-all duration-300 ${
           isScrolled
             ? 'bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#E8E2D9]/80 shadow-md py-2.5'
-            : 'bg-[#1E1715]/75 backdrop-blur-md border-b border-white/10 py-3 sm:py-4'
+            : 'bg-transparent border-b border-transparent py-3 sm:py-4'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -83,7 +105,7 @@ export const Header: React.FC = () => {
               </span>
               <span
                 className={`text-[9px] sm:text-xs uppercase tracking-wider font-semibold block mt-0.5 transition-colors ${
-                  isScrolled ? 'text-[#8B6B5D]' : 'text-amber-200/80'
+                  isScrolled ? 'text-[#8B6B5D]' : 'text-amber-200/90'
                 }`}
               >
                 Canil em Fortaleza/CE
@@ -100,7 +122,7 @@ export const Header: React.FC = () => {
                 className={`font-medium text-sm transition-colors duration-200 ${
                   isScrolled
                     ? 'text-[#2D2422] hover:text-[#C85A70]'
-                    : 'text-amber-50/90 hover:text-amber-300'
+                    : 'text-white hover:text-amber-300 drop-shadow-sm'
                 }`}
               >
                 {link.name}
@@ -141,7 +163,7 @@ export const Header: React.FC = () => {
             className={`lg:hidden border-b px-4 pt-3 pb-6 mt-2 shadow-xl animate-in slide-in-from-top duration-200 ${
               isScrolled
                 ? 'bg-[#FAF7F2] border-[#E8E2D9]'
-                : 'bg-[#1E1715] border-white/10'
+                : 'bg-[#1A1412]/95 backdrop-blur-lg border-white/10'
             }`}
           >
             <nav className="flex flex-col gap-3">
