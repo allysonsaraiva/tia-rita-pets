@@ -83,7 +83,7 @@ export const Hero: React.FC<HeroProps> = ({ onLoadingStatusChange }) => {
     <section
       id="hero"
       ref={heroRef}
-      className={`relative w-full bg-[#1A1412] ${reducedMotion ? 'h-screen' : 'h-[200vh]'}`}
+      className={`relative w-full bg-[#1A1412] ${reducedMotion ? 'h-screen' : 'h-[280vh]'}`}
     >
       {/* Sticky Canvas & Story Container */}
       <div className="sticky top-0 h-screen w-full overflow-hidden">

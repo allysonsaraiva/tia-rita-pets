@@ -182,8 +182,8 @@ export const HeroScrollCanvas: React.FC<HeroScrollCanvasProps> = ({
       const targetFrame = reducedMotion ? 0 : progress * (totalFrames - 1);
 
       // LERP (Linear Interpolation) factor for buttery 60fps smoothing
-      // 0.25 gives fast, crisp responsiveness without lag
-      currentFrameRef.current += (targetFrame - currentFrameRef.current) * 0.25;
+      // 0.15 gives a smooth, fluid, cinematic pace
+      currentFrameRef.current += (targetFrame - currentFrameRef.current) * 0.15;
 
       const roundedFrame = Math.min(
         totalFrames - 1,
