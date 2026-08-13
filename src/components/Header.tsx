@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { MessageCircle, Menu, X, Phone, Clock, MapPin } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 import { businessInfo, getWhatsAppLink } from '../data/content';
 
 export const Header: React.FC = () => {
@@ -11,7 +12,6 @@ export const Header: React.FC = () => {
       const racasElement = document.getElementById('racas');
       if (racasElement) {
         const rect = racasElement.getBoundingClientRect();
-        // Set solid background when entering BreedsSection (#racas)
         if (rect.top <= 100) {
           setIsScrolled(true);
           return;
@@ -49,11 +49,11 @@ export const Header: React.FC = () => {
       <header
         className={`transition-all duration-300 ${
           isScrolled
-            ? 'bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#E8E2D9]/80 shadow-md py-2.5'
+            ? 'bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#E8E2D9]/80 shadow-sm pt-2.5'
             : 'bg-linear-to-b from-black/60 via-black/30 to-transparent py-3 sm:py-4'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 pb-2 lg:px-8 flex items-center justify-between">
           {/* Logo */}
           <a href="#hero" className="flex items-center gap-3 group">
             <img
@@ -99,57 +99,61 @@ export const Header: React.FC = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className={`lg:hidden p-2 rounded-lg transition-colors ${
+            className={`lg:hidden p-2 rounded-lg transition-all duration-200 cursor-pointer ${
               isScrolled
                 ? 'text-[#2D2422] hover:bg-[#E8E2D9]'
                 : 'text-white hover:bg-white/10'
             }`}
-            aria-label="Abrir menu"
+            aria-label="Menu de navegação"
+            aria-expanded={mobileMenuOpen}
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            <div className="relative w-6 h-6 flex items-center justify-center">
+              <Menu
+                className={`w-6 h-6 absolute transition-all duration-300 ${
+                  mobileMenuOpen ? 'opacity-0 rotate-90 scale-75' : 'opacity-100 rotate-0 scale-100'
+                }`}
+              />
+              <X
+                className={`w-6 h-6 absolute transition-all duration-300 ${
+                  mobileMenuOpen ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-75'
+                }`}
+              />
+            </div>
           </button>
         </div>
 
-        {/* Mobile Dropdown Drawer */}
-        {mobileMenuOpen && (
-          <div
-            className={`lg:hidden border-b px-4 pt-3 pb-6 mt-2 shadow-xl animate-in slide-in-from-top duration-200 ${
-              isScrolled
-                ? 'bg-[#FAF7F2] border-[#E8E2D9]'
-                : 'bg-[#1A1412]/95 backdrop-blur-lg border-white/10'
-            }`}
-          >
-            <nav className="flex flex-col gap-3">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`font-medium py-2 text-base border-b ${
-                    isScrolled
-                      ? 'text-[#2D2422] hover:text-[#C85A70] border-[#E8E2D9]/50'
-                      : 'text-white hover:text-amber-300 border-white/10'
-                  }`}
-                >
-                  {link.name}
-                </a>
-              ))}
-              <div className="pt-3">
-                <a
-                  href={getWhatsAppLink()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="w-full flex items-center justify-center gap-2 bg-[#25D366] text-white font-semibold py-3 rounded-full text-base shadow-md"
-                >
-                  <MessageCircle className="w-5 h-5 fill-current" />
-                  <span>Falar no WhatsApp</span>
-                </a>
-              </div>
-            </nav>
-          </div>
-        )}
+        {/* Mobile Dropdown Drawer with Smooth Slide & Fade Transition */}
+        <div
+          className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out border-b px-4 ${
+            mobileMenuOpen
+              ? 'max-h-96 opacity-100 translate-y-0 py-2 mt-2 shadow-xl pointer-events-auto'
+              : 'max-h-0 opacity-0 -translate-y-4 pt-0 pb-0 mt-0 pointer-events-none border-transparent shadow-none'
+          } ${
+            isScrolled
+              ? 'bg-[#FAF7F2] border-[#E8E2D9]'
+              : 'bg-[#1A1412]/95 backdrop-blur-lg border-white/10'
+          }`}
+        >
+          <nav className="flex flex-col gap-3">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className={`font-medium py-2 text-base border-b transition-colors ${
+                  isScrolled
+                    ? 'text-[#2D2422] hover:text-[#C85A70] border-[#E8E2D9]/50'
+                    : 'text-white hover:text-amber-300 border-white/10'
+                }`}
+              >
+                {link.name}
+              </a>
+            ))}
+          </nav>
+        </div>
       </header>
     </div>
   );
 };
+
+export default Header;
