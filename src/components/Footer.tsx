@@ -17,7 +17,7 @@ export const Footer: React.FC = () => {
               <img
                 src="/logo-tia-rita-pets.png"
                 alt="Tia Rita Pets"
-                className="h-12 w-auto bg-white p-1 rounded-xl"
+                className="h-16 w-auto bg-transparent p-1 rounded-xl"
               />
               <div>
                 <span className="font-display font-bold text-2xl text-white block leading-none">
@@ -113,22 +113,19 @@ export const Footer: React.FC = () => {
             <div className="space-y-2 text-xs text-[#A89888]">
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-rose-400 shrink-0 mt-0.5" />
-                <span>{businessInfo.address.full}</span>
+                <span className="text-xs sm:text-sm">{businessInfo.address.full}</span>
               </div>
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-rose-400 shrink-0" />
-                <a href={`tel:${businessInfo.phoneRaw}`} className="hover:text-white transition-colors">
+                <a href={`tel:${businessInfo.phoneRaw}`} className="text-xs sm:text-sm hover:text-white transition-colors">
                   {businessInfo.phoneDisplay}
                 </a>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-rose-400 shrink-0" />
-                <a href={`mailto:${businessInfo.email}`} className="hover:text-white transition-colors">
+                <a href={`mailto:${businessInfo.email}`} className="text-xs sm:text-sm hover:text-white transition-colors">
                   {businessInfo.email}
                 </a>
-              </div>
-              <div className="pt-2 text-[11px] text-[#8A7868]">
-                🕒 {businessInfo.hours}
               </div>
             </div>
           </div>

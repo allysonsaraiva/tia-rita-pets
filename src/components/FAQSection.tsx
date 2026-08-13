@@ -17,7 +17,7 @@ export const FAQSection: React.FC = () => {
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-14 space-y-3">
           <h2 className="text-3xl sm:text-4xl font-display font-bold text-[#2D2422]">
-            Tudo o que você precisa saber antes de buscar seu filhote
+            Tudo o que você precisa saber antes de <p className="text-[#C85A70]">buscar seu filhote</p>
           </h2>
           <p className="text-sm sm:text-base text-[#5A4D4A]">
             Esclarecemos as dúvidas mais comuns sobre visita, vacinas, suporte e entrega dos nossos cães de pequeno porte.
@@ -36,7 +36,7 @@ export const FAQSection: React.FC = () => {
               >
                 <button
                   onClick={() => toggleAccordion(item.id)}
-                  className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 font-bold text-base sm:text-lg text-[#2D2422] hover:text-[#C85A70] transition-colors"
+                  className="w-full cursor-pointer p-5 sm:p-6 text-left flex items-center justify-between gap-4 font-bold text-base sm:text-lg text-[#2D2422] hover:text-[#C85A70] transition-colors"
                   aria-expanded={isOpen}
                 >
                   <span className="flex items-center gap-3">

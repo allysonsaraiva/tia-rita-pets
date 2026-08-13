@@ -44,47 +44,13 @@ export const Header: React.FC = () => {
   ];
 
   return (
-    <div className="sticky top-0 z-50">
-      {/* Top Banner with Quick Info */}
-      <div
-        className={`text-xs py-1.5 px-4 transition-colors duration-300 ${
-          isScrolled
-            ? 'bg-[#140F0E] text-[#E8DCCF] shadow-xs'
-            : 'bg-black/30 backdrop-blur-xs text-amber-50/90 border-b border-white/10'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
-          <div className="flex items-center gap-4 flex-wrap">
-            <span className="flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-[#C85A70]" />
-              Meireles, Fortaleza/CE
-            </span>
-            <span className="hidden sm:flex items-center gap-1.5">
-              <Clock className="w-3.5 h-3.5 text-[#C85A70]" />
-              Atendimento todos os dias: 8h às 22h
-            </span>
-          </div>
-          <div className="flex items-center gap-3">
-            <span className="flex items-center gap-1 text-amber-300 font-semibold">
-              ★ 4.9 (115 avaliações no Google)
-            </span>
-            <a
-              href={`tel:${businessInfo.phoneRaw}`}
-              className="hidden md:flex items-center gap-1 hover:text-white transition-colors"
-            >
-              <Phone className="w-3.5 h-3.5" />
-              {businessInfo.phoneDisplay}
-            </a>
-          </div>
-        </div>
-      </div>
-
+    <div className="fixed top-0 left-0 right-0 z-50 pointer-events-auto">
       {/* Main Header */}
       <header
         className={`transition-all duration-300 ${
           isScrolled
             ? 'bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#E8E2D9]/80 shadow-md py-2.5'
-            : 'bg-transparent border-b border-transparent py-3 sm:py-4'
+            : 'bg-linear-to-b from-black/60 via-black/30 to-transparent py-3 sm:py-4'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -129,19 +95,6 @@ export const Header: React.FC = () => {
               </a>
             ))}
           </nav>
-
-          {/* Desktop CTA Button */}
-          <div className="hidden sm:flex items-center gap-4">
-            <a
-              href={getWhatsAppLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#20bd5a] text-white font-semibold px-5 py-2.5 rounded-full text-sm shadow-md hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5"
-            >
-              <MessageCircle className="w-4 h-4 fill-current" />
-              <span>Falar no WhatsApp</span>
-            </a>
-          </div>
 
           {/* Mobile Menu Button */}
           <button

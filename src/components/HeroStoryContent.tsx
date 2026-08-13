@@ -86,9 +86,9 @@ export const HeroStoryContent: React.FC<HeroStoryContentProps> = ({
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
             <a
               href="#racas"
-              className="inline-flex items-center justify-center gap-2 bg-[#C85A70] hover:bg-[#b04a5f] text-white font-bold px-7 py-3.5 rounded-full text-base shadow-lg transition-all duration-200 hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center gap-2 bg-white/15 hover:bg-white/25 text-white backdrop-blur-md border border-white/20 font-semibold px-6 py-3.5 rounded-full text-base transition-all duration-200"
             >
-              <span>Conheça Nossos Filhotes</span>
+              <span>Nossos Filhotes</span>
               <ChevronDown className="w-4 h-4" />
             </a>
 
